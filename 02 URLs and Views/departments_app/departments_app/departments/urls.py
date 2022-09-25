@@ -1,9 +1,10 @@
 from django.urls import path
 
-from departments_app.departments.views import sample_view, show_department_details
+from departments_app.departments.views import show_departments, show_department_details, redirect_to_first_department
 
 urlpatterns = (
-    path('', sample_view),
-    path('<department_id>/', show_department_details),
-    path('int/<int:department_id>/', sample_view),
+    path('', show_departments),
+    path('redirect/', redirect_to_first_department),
+    path('<department_id>/', show_departments),
+    path('int/<int:department_id>/', show_departments),
 )
