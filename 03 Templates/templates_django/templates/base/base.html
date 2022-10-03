@@ -1,0 +1,42 @@
+{% load static %}
+{% load tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block page_title %}My site {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'site.css' %}">
+    {# Site General css: #}
+    <style>
+        h1{
+            color: green;
+        }
+    </style>
+
+    {# Page specifc css: #}
+    {% block styles %} {% endblock %}
+</head>
+<body>
+
+HTML nav:
+<nav>
+    <a href="{% url 'index' %}">Go to home</a>
+
+    <a href="{% url 'redirect to home' %}">Redirect to home</a>
+</nav>
+
+Tag Nav:
+{% app_nav 'index' 'redirect to home' 'about'%}
+{% app_nav 'index' 'redirect to home' 'redirect to home' %}
+
+{# Placeholder for child templates to use #}
+{% block page_content %}
+{% endblock %}
+
+{% include 'partials/footer.html' %}
+
+{# use 'include' templates when no python logic is needed and custom tags when it is needed. #}
+</body>
+</html>

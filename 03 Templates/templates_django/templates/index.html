@@ -1,24 +1,10 @@
+{% extends 'base/base.html' %}
+
 {% load filters %} {# file name #}
 {% load tags %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-HTML nav:
-<nav>
-    <a href="{% url 'index' %}">Go to home</a>
-
-    <a href="{% url 'redirect to home' %}">Redirect to home</a>
-</nav>
-
-Tag Nav:
-{% app_nav 'index' %}
-
+{% block page_title %}My site{% endblock %}
+{% block page_content %}
 <div>
     Original: {{ values }}
 </div>
@@ -30,8 +16,8 @@ Tag Nav:
 {% student_info student  %}
 
 {% sample_tag %}
-{% sample_tag 17, Doncho, True %}
-{% sample_tag department='Engeneering', company='SoftUni'%}
+{% sample_tag 17 Doncho True %}
+{% sample_tag department='Engeneering' company='SoftUni'%}
 
 
     <h1>
@@ -84,5 +70,4 @@ Tag Nav:
             {% endfor %}
         </ul>
 
-</body>
-</html>
+{% endblock %}
