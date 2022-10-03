@@ -1,0 +1,88 @@
+{% load filters %} {# file name #}
+{% load tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+HTML nav:
+<nav>
+    <a href="{% url 'index' %}">Go to home</a>
+
+    <a href="{% url 'redirect to home' %}">Redirect to home</a>
+</nav>
+
+Tag Nav:
+{% app_nav 'index' %}
+
+<div>
+    Original: {{ values }}
+</div>
+
+<div>
+    Odd: {{ values|odd }}
+</div>
+
+{% student_info student  %}
+
+{% sample_tag %}
+{% sample_tag 17, Doncho, True %}
+{% sample_tag department='Engeneering', company='SoftUni'%}
+
+
+    <h1>
+        OG: {{ title }}: {{ value }}
+    </h1>
+    <h1>
+        Upped: {{ title|upper }}: {{ value }}
+    </h1>
+    <h1>
+        Capped first: {{ title|capfirst }}: {{ value }}
+    </h1>
+    <h1>
+        Lowered then capped first: {{ title|lower|capfirst }}: {{ value }}
+    </h1>
+    <h2>
+        {{ now }}
+    </h2>
+    <h2>
+        {{ now|date:'y/M/d'  }}
+    </h2>
+
+    <h2>
+        {{ now|app_style }}
+    </h2>
+
+    {{ info.address }}
+    {{ student.get_info }}
+    <div>
+        {% if students %}
+        {{ students|join:', ' }}
+        {% else %}
+            No students
+        {% endif %}
+    </div>
+
+    <h3>Pure 'for'</h3>
+    <ul>
+        {% for student in students %}
+            <li>{{ student }}</li>
+        {% endfor %}
+    </ul>
+
+    <h3>'for' with 'ifchanged'</h3>
+    <!--- Does not show reps -->
+        <ul>
+            {% for student in students %}
+                {% ifchanged student %}
+                    <li>{{ student }}</li>
+                {% endifchanged %}
+            {% endfor %}
+        </ul>
+
+</body>
+</html>
