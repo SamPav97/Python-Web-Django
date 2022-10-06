@@ -10,6 +10,15 @@ class Department(models.Model):
         return f'Id: {self.pk}; Name: {self.name}'
 
 
+class Project(models.Model):
+    name = models.CharField(max_length=30)
+    code_name = models.CharField(
+        max_length=10,
+        unique=True
+    )
+    deadline = models.DateField()
+
+
 class Employee(models.Model):
     first_name = models.CharField(
         max_length=30
@@ -55,12 +64,27 @@ class Employee(models.Model):
         on_delete=models.CASCADE,
     )
 
+    projects = models.ManyToManyField(
+        Project,
+        related_name='employees',
+    )
+
     @property
     def fullname(self):
         return f'{self.first_name}'
 
     def __str__(self):
         return f'Id: {self.pk}; Name: {self.fullname}'
+
+
+class EmployeesProjects(models.Model):
+    employee_id = models.ForeignKey(Employee, on_delete=models.RESTRICT)
+    project_id = models.ForeignKey(Project, on_delete=models.RESTRICT)
+
+    date_joined = models.DateField(
+        auto_now_add=True,
+    )
+    # Additional info
 
 
 '''

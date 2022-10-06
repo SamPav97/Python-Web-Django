@@ -1,6 +1,11 @@
 from django.contrib import admin
 
-from models_demos.web.models import Employee, Department
+from models_demos.web.models import Employee, Department, Project
+
+
+@admin.register(Project)
+class DepartmentAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Department)
@@ -10,8 +15,9 @@ class DepartmentAdmin(admin.ModelAdmin):
 
 # This model is enabled in Django Admin.
 @admin.register(Employee)
-class EmployeeAdmin(admin.ModelAdmin):
+class ProjectAdmin(admin.ModelAdmin):
     pass
+
 
 
 
