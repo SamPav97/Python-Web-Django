@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>In Memory</h1>
+<ul>
+    {% for employee in employees %}
+        <li>
+            <div>
+                {{ employee.first_name }}
+            </div>
+            <div>
+                {{ employee.department.name }}
+            </div>
+            <div>
+                Experience: {{ employee.years_of_experience }}
+                Age: {{ employee.age }}
+            </div>
+        </li>
+    {% endfor %}
+
+</ul>
+
+<h1>From DB</h1>
+<ul>
+    {% for employee in employees2 %}
+        <li>
+            <div>
+                {{ employee.first_name }}
+            </div>
+            <div>
+                {{ employee.department.name }}
+            </div>
+            <div>
+                Experience: {{ employee.years_of_experience }}
+                Age: {{ employee.age }}
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+
+<h1>
+    {{ department.name }}
+</h1>
+</body>
+</html>
