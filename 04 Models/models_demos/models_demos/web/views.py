@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 from models_demos.web.models import Employee, Department
@@ -20,3 +20,10 @@ def index(request):
     }
 
     return render(request, 'index.html', context)
+
+
+def delete_employee(request, pk):
+    employee = get_object_or_404(Employee, pk=pk)
+    print(employee)
+    employee.delete()
+    return redirect('index')

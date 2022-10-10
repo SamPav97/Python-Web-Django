@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 
 # Thru this class we can access the employees table in the DB... Model fields == Class attributes
@@ -5,6 +7,10 @@ from django.db import models
 
 class Department(models.Model):
     name = models.CharField(max_length=15)
+    slug = models.SlugField(
+        unique=True,
+        null=True,
+    )
 
     def __str__(self):
         return f'Id: {self.pk}; Name: {self.name}'
@@ -20,6 +26,9 @@ class Project(models.Model):
 
 
 class Employee(models.Model):
+    class Meta:
+        ordering = ('-years_of_experience', 'age',)
+
     first_name = models.CharField(
         max_length=30
     )
@@ -72,6 +81,10 @@ class Employee(models.Model):
     @property
     def fullname(self):
         return f'{self.first_name}'
+
+    @property
+    def year_of_employment(self):
+        return date.today() - self.created_on
 
     def __str__(self):
         return f'Id: {self.pk}; Name: {self.fullname}'
