@@ -1,6 +1,9 @@
 # pets/models.py
 
 from django.db import models
+from django.utils.text import slugify
+
+from Petstagram_project.core.model_mixins import StrFromFieldsMixin
 
 '''
 The fields Name and Pet Photo are required:
@@ -11,7 +14,8 @@ The field date of birth is optional:
 '''
 
 
-class Pet(models.Model):
+class Pet(StrFromFieldsMixin, models.Model):
+    str_fields = ('id', 'name')
     MAX_NAME = 30
     name = models.CharField(
         max_length=MAX_NAME,
@@ -27,7 +31,7 @@ class Pet(models.Model):
     slug = models.SlugField(
         unique=True,
         null=False,
-        blank=False,
+        blank=True,
     )
 
     date_of_birth = models.DateField(
@@ -35,3 +39,10 @@ class Pet(models.Model):
         blank=True,
     )
 
+    # When no slug is given, slug is generated.
+    def save(self, *args, **kwargs):
+        # Create/update so that the thing is in db, so it has self.id
+        super().save(*args, **kwargs)
+        if not self.slug:
+            self.slug = slugify(f'{self.id}-{self.name}')
+        return super().save(*args, **kwargs)
