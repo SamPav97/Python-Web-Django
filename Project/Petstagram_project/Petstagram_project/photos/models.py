@@ -21,7 +21,7 @@ There should be created one more field that will be automatically generated:
 
 
 class Photo(StrFromFieldsMixin, models.Model):
-
+    str_fields = ('pk', 'photo', 'location')
     MIN_DESCRIPTION_LENGTH = 10
     MAX_DESCRIPTION_LENGTH = 300
 
