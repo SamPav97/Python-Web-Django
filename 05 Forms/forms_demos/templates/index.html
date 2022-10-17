@@ -1,20 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>
-    {% if name %}
-        Hello, {{ name }}! Nice to see you!
-    {% else %}
-        Please enter your name.
-    {% endif %}
-</h1>
-<form>
-    {{ form }}
-    <button>Send form</button>
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+    Forms
+{% endblock %}
+
+{% block content %}
+
+    <h2>
+        {% if name %}
+            Hello, {{ name }}! Nice to see you!
+        {% else %}
+            Please enter your name.
+        {% endif %}
+    </h2>
+    <h3>Default Form:</h3>
+    <form action="{% url 'index' %}" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <button>Send form</button>
+    </form>
+    <h3>Manual Form:</h3>
+    <form action="{% url 'index' %}" method="post">
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}"><strong>{{ field.label }}</strong>
+                {{ field }}
+            </label>
+
+        {% endfor %}
+        {% csrf_token %}
+        <button>Send form</button>
+    </form>
+{% endblock %}
