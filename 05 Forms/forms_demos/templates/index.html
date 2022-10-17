@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>
+    {% if name %}
+        Hello, {{ name }}! Nice to see you!
+    {% else %}
+        Please enter your name.
+    {% endif %}
+</h1>
+<form>
+    {{ form }}
+    <button>Send form</button>
+</form>
+</body>
+</html>
