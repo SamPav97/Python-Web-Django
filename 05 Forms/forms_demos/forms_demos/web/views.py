@@ -1,4 +1,4 @@
-
+from django import forms
 from django.shortcuts import render
 
 from forms_demos.web.forms import PersonForm
@@ -28,10 +28,33 @@ def index_form(request):
     return render(request, 'index.html', context)
 
 
-class Person
+class PersonCreateForm(forms.ModelForm):
+    story = forms.CharField(
+        widget=forms.Textarea(),
+    )
+
+    class Meta:
+        model = Person
+        fields = '__all__'
 
 
 def index_model_forms(request):
+    instance = Person.objects.get(pk=1)
+    if request.method == 'GET':
+        form = PersonCreateForm(instance=instance)
+    else:
+        form = PersonCreateForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save() # Same as below
+            # pets = form.cleaned_data.pop('pets')
+            # person = Person.objects.create(
+            #     **form.cleaned_data
+            # )
+            #
+            # person.pets.set(pets)
+            # person.save()
+
     context = {
+        'form': form,
     }
     return render(request, 'model_forms.html', context)

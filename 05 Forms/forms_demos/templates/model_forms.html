@@ -5,4 +5,28 @@
 {% endblock %}
 
 {% block content %}
+
+        <form action="{% url 'model forms' %}" method="post">
+        {{ form }}
+        {% csrf_token %}
+        <button>Create</button>
+    </form>
+    <h3>Manual Form:</h3>
+    <form action="{% url 'model forms' %}" method="post">
+        {% for field in form %}
+            <label for="{{ field.id_for_label }}"><strong>{{ field.label }}</strong>
+                {{ field }}
+            </label>
+
+        {% endfor %}
+        {% csrf_token %}
+        <button>Create</button>
+    </form>
+
+
+    <form method="post" action="{% url 'model forms' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Create</button>
+    </form>
 {% endblock %}
