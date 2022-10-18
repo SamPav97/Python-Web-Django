@@ -12,6 +12,10 @@ class ToDoForm(forms.Form):
         validators=(
             validate_text,
         ),
+        # Make custom error message for an error that is already default - like required field.
+        error_messages={
+            'required': 'Todo text must be set!'
+        }
     )
     is_done = forms.BooleanField(
         required=False,
@@ -47,7 +51,7 @@ class TodoCreateForm(forms.ModelForm):
             validate_max_todos_per_person(assignee)
         except ValidationError:
             assignee = Person.objects.get(name='Unassigned')
-
+        # Return assignee coz its a transformation. that is how it must be done.
         return assignee
 
     # here clean is used as validation and an error is thrown if false.

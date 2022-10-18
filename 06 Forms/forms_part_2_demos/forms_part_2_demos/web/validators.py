@@ -4,7 +4,10 @@ from django.utils.deconstruct import deconstructible
 
 def validate_text(value):
     if '_' in value:
-        raise ValidationError('`_` is invalid character for `text`')
+        raise ValidationError(
+            message='`_` is invalid character for `text`',
+            code='invalid',
+            )
     # if valid:
     #   do nothing
     # else:
