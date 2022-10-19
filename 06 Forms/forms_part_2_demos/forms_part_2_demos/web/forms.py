@@ -60,3 +60,21 @@ class TodoCreateForm(forms.ModelForm):
     #     validate_max_todos_per_person(assignee)
     #     return assignee
 
+
+class PersonCreateForm(forms.ModelForm):
+    class Meta:
+        model = Person
+        fields = '__all__'
+
+    def clean_profile_image(self):
+        # Change name of uploaded file, so you have control over that.
+        profile_image = self.cleaned_data['profile_image']
+        profile_image.name = self.cleaned_data['this is the new name']
+        return profile_image
+
+    # If we wanna set name of speciffic person as name of image tho. We need it after cleaned so we need clean.
+    # def clean(self):
+    #     super().clean() # After this all data is cleaned.
+    #     profile_image = self.cleaned_data['profile_image']
+    #     profile_image.name = self.cleaned_data['name']
+

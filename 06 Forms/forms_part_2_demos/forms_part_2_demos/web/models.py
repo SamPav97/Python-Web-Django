@@ -9,6 +9,12 @@ class Person(models.Model):
         max_length=MAX_NAME_LEN,
     )
 
+    profile_image = models.ImageField(
+        upload_to='persons',
+        null=True,
+        blank=True,
+    )
+
     def __str__(self):
         return f'{self.name}'
 
