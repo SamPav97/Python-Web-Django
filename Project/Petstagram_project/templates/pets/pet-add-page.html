@@ -5,8 +5,7 @@
     <div class="edit-delete edit-photo">
         <h2>Add pet</h2>
 
-        <!-- Start Add Pet Form -->
-        <form action="#">
+        <!--       <form action="#">
             <p>
                 <label for="pet-name">Pet name: </label>
                 <input type="text" placeholder="Pet name">
@@ -19,8 +18,17 @@
                 <label for="pet-image">Link to image: </label>
                 <input type="text" placeholder="Link to image">
             </p>
+
+            <button class="add-btn" type="submit">Add Pet</button>
+        </form> -->
+
+        <!-- Start Add Pet Form -->
+        <form action="{% url 'add pet' %}" method="post">
+            {{ form.as_p }}
+            <!-- to get it in the format we had we need to say as p -->
             <!-- Add Pet Button -->
             <button class="add-btn" type="submit">Add Pet</button>
+            {% csrf_token %}
         </form>
         <!-- End Add Pet Form -->
 
