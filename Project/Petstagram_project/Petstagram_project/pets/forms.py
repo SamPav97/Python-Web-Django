@@ -44,6 +44,37 @@ class PetEditForm(PetBaseForm):
     pass
 
 
-class PetDeleteForm(PetBaseForm):
-    pass
+class DisabledFormMixin:
+    disabled_fields = ()
+    fields = {}
+
+    def _disable_fields(self):
+        if self.disabled_fields == '__all__':
+            fields = self.fields.keys()
+        else:
+            fields = self.disabled_fields
+
+        for field_name in fields:
+            if field_name in self.fields:
+                field = self.fields[field_name]
+                field.widget.attrs['readonly'] = 'readonly'
+
+
+class PetDeleteForm(DisabledFormMixin, PetBaseForm):
+    # Another way to set widgets to readonly and disabled. The other is through labels in the meta class.
+    disabled_fields = ('name', 'date_of_birth', 'personal_photo')
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._disable_fields()
+
+    # We override the save method to actually delete. con otherwise how do we delete?
+    # This is only done for the delete class.
+    def save(self, commit=True):
+        if commit:
+            self.instance.delete()
+        else:
+            pass
+        return self.instance
+
 

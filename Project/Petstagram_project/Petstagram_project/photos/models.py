@@ -29,6 +29,8 @@ class Photo(StrFromFieldsMixin, models.Model):
 
     # Requires media file to work correctly.
     photo = models.ImageField(
+        # mediafiles for upload is by default because its in settings
+        upload_to='pet_photos/',
         null=False,
         blank=True,
         validators=(validate_file_less_than_5mb,),

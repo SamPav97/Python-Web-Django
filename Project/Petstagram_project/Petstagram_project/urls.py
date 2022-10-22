@@ -1,4 +1,5 @@
-
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
@@ -11,10 +12,15 @@ urlpatterns = [
 
 ]
 
-'''
-After `startapp APP_NAME`
+if settings.DEBUG:
+    urlpatterns += (
+        static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    )
 
-1. Create `APP_NAME/urls.py with empty `urlpatterns`
-2. Include `APP_NAME/urls.py` into project's urls.py
-3. ADD `APP_NAME` to `INSTALLED_APPS` in settings.py
-'''
+    # '''
+# After `startapp APP_NAME`
+#
+# 1. Create `APP_NAME/urls.py with empty `urlpatterns`
+# 2. Include `APP_NAME/urls.py` into project's urls.py
+# 3. ADD `APP_NAME` to `INSTALLED_APPS` in settings.py
+# '''
