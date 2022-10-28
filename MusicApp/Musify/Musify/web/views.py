@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 
-from Musify.web.forms import AlbumCreateForm
+from Musify.web.forms import AlbumCreateForm, AlbumEditForm, AlbumDeleteForm
 from Musify.web.models import Profile, Album
 
 
@@ -48,12 +48,50 @@ def add_album(request):
 
 
 def details_album(request, pk):
-    return render(request, 'album/album-details.html',)
+    album = Album.objects \
+        .filter(pk=pk) \
+        .get()
+    context = {
+        'album': album
+    }
+    return render(request, 'album/album-details.html', context,)
 
 
 def edit_album(request, pk):
-    return render(request, 'album/edit-album.html',)
+    album = Album.objects \
+        .filter(pk=pk) \
+        .get()
+
+    if request.method == 'GET':
+        form = AlbumEditForm(instance=album)
+    else:
+        form = AlbumEditForm(request.POST, instance=album)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+
+    context = {
+        'form': form,
+        'album': album,
+    }
+    return render(request, 'album/edit-album.html', context,)
 
 
 def delete_album(request, pk):
-    return render(request, 'album/delete-album.html',)
+    album = Album.objects \
+        .filter(pk=pk) \
+        .get()
+
+    if request.method == 'GET':
+        form = AlbumDeleteForm(instance=album)
+    else:
+        form = AlbumDeleteForm(request.POST, instance=album)
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+
+    context = {
+        'form': form,
+        'album': album,
+    }
+    return render(request, 'album/delete-album.html', context,)
