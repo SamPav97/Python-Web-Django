@@ -1,0 +1,53 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8"/>
+    <title>My Music App</title>
+    <!-- Static Load -->
+    <link rel="stylesheet" href="{% static '/css/style.css' %}"/>
+</head>
+
+<body>
+<!-- I import style here because the css wont do it for some reason -->
+    <style>
+body {
+  background-image: url('{% static '/images/back.jpg' %}');
+}
+    </style>
+<div id="box">
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <img src="{% static 'images/headphones.png' %}" alt="headphones">
+            <a href="{% url 'index' %}">Home</a><ul></ul>
+            <ul>
+                <!--Only for user with created profile-->
+                <li><a href="{% url 'add album' %}">Create Album</a></li>
+                {# {% url 'details profile' pk=profile.pk %} #}
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </nav>
+    </header>
+    <!-- End Navigation Bar -->
+<main>
+    {% block content %}
+    {% endblock %}
+
+</main>
+    <!-- Main Content -->
+
+    <!-- Footer -->
+    <footer>
+        <div>
+            Musify
+        </div>
+    </footer>
+    <!-- End Footer -->
+
+</div>
+</body>
+</html>
