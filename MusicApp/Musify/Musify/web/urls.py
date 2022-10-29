@@ -1,6 +1,7 @@
 from django.urls import path, include
 
-from Musify.web.views import index, add_album, edit_album, delete_album, details_profile, delete_profile, details_album
+from Musify.web.views import index, add_album, edit_album, delete_album, details_profile, delete_profile, details_album, \
+    add_profile
 
 urlpatterns = (
     path('', index, name='index'),
@@ -11,7 +12,8 @@ urlpatterns = (
         path('delete/<int:pk>/', delete_album, name='delete album'),
     ])),
     path('profile/', include([
-        path('details/<int:pk>/', details_profile, name='details profile'),
-        path('delete/<int:pk>/', delete_profile, name='delete profile'),
+        path('add/', add_profile, name='add profile'),
+        path('details/', details_profile, name='details profile'),
+        path('delete/', delete_profile, name='delete profile'),
     ])),
 )
