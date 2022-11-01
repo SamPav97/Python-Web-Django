@@ -9,6 +9,8 @@ class Profile(models.Model):
     USERNAME_MIN_LENGTH = 2
     AGE_MIN_VALUE = 18
     NAMESPASS_MAX_LENGTH = 30
+    user = models.B
+
     username = models.CharField(
         max_length=USERNAME_MAX_LENGTH,
         null=False,
