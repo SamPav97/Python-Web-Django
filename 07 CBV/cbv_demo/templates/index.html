@@ -19,11 +19,11 @@ From CBV
     </button>
     {% csrf_token %}
 </form>
-{#<a href="{% url 'employee create' %}">Create new employee</a>#}
+<a href="{% url 'employee create' %}">Create new employee</a>
 <ul>
     {% for employee in employees %}
         <li>
-{#            <a href="{% url 'employee details' pk=employee.pk %}">#}
+            <a href="{% url 'employee details' pk=employee.pk %}">
                 {{ employee.full_name }}
             </a>
         </li>
