@@ -60,3 +60,4 @@ class AppUser(auth_models.AbstractUser):
         max_length=Gender.max_len(),
 
     )
+

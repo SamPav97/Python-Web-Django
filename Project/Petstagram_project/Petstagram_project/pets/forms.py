@@ -8,7 +8,7 @@ class PetBaseForm(forms.ModelForm):
         model = Pet
         # fields = '__all__' # We need to skip slug so:
         # fields = ('name', 'personal_photo', 'date_of_birth') # same as:
-        exclude = ('slug',)
+        exclude = ('slug', 'user')
         # To set the labels as you wish them (text before input box)
         labels = {
             'name': 'Pet Name',

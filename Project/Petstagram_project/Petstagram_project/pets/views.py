@@ -1,11 +1,13 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from Petstagram_project.core.photo_utils import apply_likes_count, apply_user_liked_photo
 from Petstagram_project.pets.forms import PetCreateForm, PetEditForm, PetDeleteForm
 from Petstagram_project.pets.models import Pet
-from Petstagram_project.pets.utils import get_pet_by_name_and_username
+from Petstagram_project.pets.utils import get_pet_by_name_and_username, is_owner
 
 
+@login_required
 def add_pet(request):
     if request.method == 'GET':
         form = PetCreateForm()
@@ -13,17 +15,23 @@ def add_pet(request):
         # Request method == POST
         form = PetCreateForm(request.POST)
         if form.is_valid():
-            form.save() # Save the object in db
-            return redirect('details user', pk=1) # TODO: fix this when auth
+            # Create pet but dont push to db so u can say that pet user = user
+            pet = form.save(commit=False)
+            pet.user = request.user
+            pet.save()
+            return redirect('details user', pk=request.user.pk)
     context = {
-        'form': PetCreateForm(),
+        'form': form,
     }
     return render(request, 'pets/pet-add-page.html', context)
 
 
 def edit_pet(request, username, pet_slug):
-    # TODO: Use username when auth
-    pet = Pet.objects.filter(slug=pet_slug).get()
+    pet = get_pet_by_name_and_username(pet_slug, username)
+
+    if not is_owner(request, pet):
+        return redirect('details pet', username=username, pet_slug=pet_slug)
+
     if request.method == 'GET':
         form = PetEditForm(instance=pet)
     else:
@@ -67,6 +75,7 @@ def details_pet(request, username, pet_slug):
         'pet': pet,
         'photos_count': pet.photo_set.count(),
         'pet_photos': photos,
+        'is_owner': pet.user == request.user,
     }
     return render(request, 'pets/pet-details-page.html', context,)
 

@@ -1,4 +1,5 @@
 # photos/models.py
+from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator
 from django.db import models
@@ -8,6 +9,8 @@ from Petstagram_project.core.model_mixins import StrFromFieldsMixin
 from Petstagram_project.pets.models import Pet
 from Petstagram_project.photos.validators import validate_file_less_than_5mb
 
+
+UserModel = get_user_model()
 '''
 The field Photo is required:
 •	Photo - the user can upload a picture from storage, the maximum size of the photo can be 5MB
@@ -57,6 +60,10 @@ class Photo(StrFromFieldsMixin, models.Model):
         blank=True,
     )
 
+    user = models.ForeignKey(
+        UserModel,
+        on_delete=models.RESTRICT,
+    )
     # One-to-one relations
 
     # One-to-many relations
@@ -66,4 +73,7 @@ class Photo(StrFromFieldsMixin, models.Model):
         Pet,
         blank=True,
     )
+
+
+
 

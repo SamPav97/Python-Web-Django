@@ -16,7 +16,7 @@
                             <div class="profilepic">
                                 <div class="profile_img">
                                     <div class="image">
-                                        <img src="/static/images/person.png" alt="img8">
+                                        <img src="{% static 'images/person.png' %}" alt="img8">
                                     </div>
                                 </div>
                             </div>
@@ -25,8 +25,12 @@
 
                             <!-- Link to User Profile Details Page -->
                             <a href="#">
+                                {% if photo.user.get_full_name %}
+                                {{ photo.user.get_full_name }}
+                                {% else %}
+                                    {{ photo.user.username }}
+                                {% endif %}
                                 <!-- IF user has first name and last name -->
-                                Diyan Kalaydzhiev
                                 <!-- else -->
                                 <!-- show user username -->
                             </a>
@@ -39,7 +43,7 @@
 
                             <!-- IF the viewer is the creator of the photo -->
                             <div class="edit-delete-btns">
-
+                                {% if is_owner %}
                                 <!-- Link to Edit Pet Photo Page -->
                                 <a href="{% url 'edit photo' pk=photo.pk%}">
                                     <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}"
@@ -51,6 +55,7 @@
                                     <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
                                 </a>
                             </div>
+                                {% endif %}
                             <!-- End IF the viewer is the creator of the photo -->
 
                         </h3>
@@ -60,7 +65,7 @@
                 </div>
 
                 <!-- Start Pet Photo -->
-                <div class="imgBx" id="place the id of the photo here">
+                <div class="imgBx" id="{{ photo.pk }}">
                     <!-- Pet Photo -->
                     <img src="/media/{{ photo.photo }}" alt="Photo of the pets {{ photo.tagged_pets.all|join:', ' }}" class="cover">
                 </div>
@@ -145,22 +150,17 @@
                     <p class="likes">{{ likes_count }}</p>
 
                     <!-- Start Tagged Pets Section-->
+                {% for pet in photo.tagged_pets.all %}
                     <!-- Link to First Tagged Pet Details Page -->
-                    <a href="#">
+                    <a href="{% url 'details pet' pet_slug=pet.slug username=pet.user.username %}">
                         <p class="message">
-                            <b>Sasho</b>
+                            <b>{{ pet.name }}</b>
                         </p>
                     </a>
-                    <!-- Link to Second Tagged Pet Details Page -->
-                    <a href="#">
-                        <p class="message">
-                            <b>Some other fish</b>
-                        </p>
-                    </a>
-                    <!-- End Tagged Pets Section-->
+                {% endfor %}
 
                     <!-- Date of Publication or edit of the Photo -->
-                    <h5 class="postTime">19/09/2022</h5>
+                    <h5 class="postTime">{{ photo.publication_date }}</h5>
 
                     <!-- Start Comments Section -->
                     <div class="comments">
