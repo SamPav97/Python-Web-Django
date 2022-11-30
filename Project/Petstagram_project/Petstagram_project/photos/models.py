@@ -1,4 +1,5 @@
 # photos/models.py
+from cloudinary import models as cloudinary_models
 from django.contrib.auth import get_user_model
 from django.core.exceptions import ValidationError
 from django.core.validators import MinLengthValidator
@@ -31,12 +32,12 @@ class Photo(StrFromFieldsMixin, models.Model):
     MAX_LOCATION_LENGTH = 30
 
     # Requires media file to work correctly.
-    photo = models.ImageField(
+    photo = cloudinary_models.CloudinaryField(
         # mediafiles for upload is by default because its in settings
-        upload_to='pet_photos/',
+        #upload_to='pet_photos/',
         null=False,
         blank=True,
-        validators=(validate_file_less_than_5mb,),
+        #validators=(validate_file_less_than_5mb,),
     )
 
     description = models.CharField(

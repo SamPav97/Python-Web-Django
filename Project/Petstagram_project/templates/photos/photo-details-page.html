@@ -67,7 +67,7 @@
                 <!-- Start Pet Photo -->
                 <div class="imgBx" id="{{ photo.pk }}">
                     <!-- Pet Photo -->
-                    <img src="/media/{{ photo.photo }}" alt="Photo of the pets {{ photo.tagged_pets.all|join:', ' }}" class="cover">
+                    <img src="{{ photo.photo.url }}" alt="Photo of the pets {{ photo.tagged_pets.all|join:', ' }}" class="cover">
                 </div>
                 <!-- End Pet Photo -->
 
