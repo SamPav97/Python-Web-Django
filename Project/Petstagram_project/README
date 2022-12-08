@@ -1,0 +1,9 @@
+'Petstagram': an app like Instagram but for pets. This project was done as part of my training.
+
+Backend: 5+ models with all three kinds of relationships applied; class and function based views; 
+customized forms; customized user and login/register/logout functionality; public and private part for web-app; customized admin site. 
+
+Frontend: made with templates (HTML & CSS).
+
+Experience gained with: Django, PostgreSQL, AWS, Docker, classes and objects, class hierarchies, encapsulation, inheritance, polymorphism;
+iterators and generators, decorators, unit-testing, TDD, SOLID Principles, SSR, etc.
