@@ -1,6 +1,6 @@
-This repository contains an in-progress Django Project called 'Petstagram' (an Instagram for pets) - located in the 'Project' folder. The other folders contain other work with Django.
+This repository contains the Django Project called 'Petstagram' (an Instagram for pets) - located in the 'Project' folder. The other folders contain other work with Django.
 
-Experience gained with: Django - templates, models, forms, PostgreSQL.
+Experience gained with: Django - templates, models, forms, admin, views; Docker; AWS; HTML & CSS; PostgreSQL; etc.
 
 Other courses: 1 - "Python for Everybody" by University of Michigan. 5 simple introductory courses over February, March, and April 2021.
 
@@ -16,4 +16,6 @@ Other courses: 1 - "Python for Everybody" by University of Michigan. 5 simple in
 
 7 - "JavaScript Applications" by SoftUni. July - August 2022. Final Grade: "6/6".
 
-8 - "Python Web Basics" by SoftUni. September - December 2022. Final Grade: TBA. See above.
+8 - "Python Web Basics" by SoftUni. September - October 2022. Final Grade: "5.60/6". See above.
+
+9 - "Python Web Framework" by SoftUni. October - December 2022. Final Grade: "6/6". See above.
